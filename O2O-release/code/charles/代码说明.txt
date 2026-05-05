@@ -1,0 +1,22 @@
+season 1
+
+这个目录是本项目的主流程代码目录，主要负责数据划分、特征工程、训练数据生成和模型训练。
+
+主要文件说明如下：
+
+- config.py：统一配置文件，定义原始数据路径、输出目录、字段名和时间窗口
+- data_view.py：封装原始数据读取和基础过滤逻辑
+- data_split.py：按时间窗口划分训练集、验证集、预测集，并导出中间数据
+- feature_extract.py：提取用户、商家、优惠券、用户-商家交互等特征
+- gen_data.py：把特征表和样本表合并，生成模型可直接使用的数据文件
+- xgb.py：训练 XGBoost 模型，输出模型文件、验证结果和 submission
+- run_all.sh：一键串联整个流程，依次执行数据划分、特征生成、数据整理和模型训练
+
+运行顺序一般是：
+
+1. 运行 data_split.py
+2. 运行 feature_extract.py
+3. 运行 gen_data.py
+4. 运行 xgb.py
+
+最终会在 data/model/ 和 data/submission/ 下生成训练好的模型、分析文件和提交文件。
